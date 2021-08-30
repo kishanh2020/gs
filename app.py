@@ -2,8 +2,12 @@ from flask import Flask, request, render_template
 import pickle
 import pandas as pd
 import numpy as np
+from flask_cors import CORS, cross_origin
+from wsgiref import simple_server
+
 
 app = Flask(__name__)
+CORS(app)
 model = pickle.load(open('mlr.sav', 'rb'))
 
 @app.route('/')
@@ -84,6 +88,9 @@ def predict():
 
         return render_template('home1.html', prediction_text=' {}'.format(my_prediction))
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__=="__main__":
+    host = '0.0.0.0'
+    port = 8080
+    httpd = simple_server.make_server(host, port, app)
+    httpd.serve_forever()
     
