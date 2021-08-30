@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Games Score Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ipl-favicon.ico') }}">
+
+    <script src="https://kit.fontawesome.com/f13b0bc903.js" crossorigin="anonymous"></script>
+    </head>
+  <body>
+      <h1 id= 'jk2'>Game Score Prediction</h1>
+      <div class = "register">
+      <form id="register" action="{{ url_for('predict') }}"  method="post">
+
+          <label> BallPark_ID: </label><br>
+          <select name="ballpark_id" style="font-size:10pt; background-color:white">
+                        <option value="none">--- Select a Ball park Id ---</option>
+                        <option value="NYC20">NYC20</option>
+                        <option value="STP01">STP01</option>
+                        <option value="MIL06">MIL06</option>
+                        <option value="CHI11">CHI11</option>
+                        <option value="LOS03">LOS03</option>
+                        <option value="STL10">STL10</option>
+                        <option value="SFO03">SFO03</option>
+                        <option value="NYC21">NYC21</option>
+                        <option value="SEA03">SEA03</option>
+                        <option value="PHO01">PHO01</option>
+                        <option value="TOR02">TOR02</option>
+                        <option value="DEN02">DEN02</option>
+                        <option value="ARL02">ARL02</option>
+                        <option value="WAS11">WAS11</option>
+                        <option value="CHI12">CHI12</option>
+                        <option value="DET05">DET05</option>
+
+
+                    </select><br><br>
+
+          <label> H_off_avg: </label><br>
+          <input class="form-input" type="text" name="H-off_avg" placeholder="Eg:0.15"><br><br>
+          <label> H_off_ops: </label><br>
+          <input class="form-input" type="text" name="H-off_ops" placeholder="Eg. 0.64"><br><br>
+          <label> H_pit_whip: </label><br>
+          <input class="form-input" type="text" name="H-pit_whip" placeholder="Eg. 1.65"><br><br>
+          <label> H_pit_k_9: </label><br>
+          <input class="form-input" type="text" name="H-pit_k/9" placeholder="Eg. 11"><br><br>
+          <label> V-off_avg: </label><br>
+          <input class="form-input" type="text" name="V-off_avg" placeholder="Eg. 0.23"><br><br>
+          <label> V_off_ops: </label><br>
+          <input class="form-input" type="text" name="V-off_ops" placeholder="Eg. 0.83"><br><br>
+           <label> V_pit_whip: </label><br>
+          <input class="form-input" type="text" name="V-pit_whip" placeholder="Eg. 1.83"><br><br>
+           <label> V_pit_k_9: </label><br>
+          <input class="form-input" type="text" name="V-pit_k/9" placeholder="Eg. 17.83"><br><br>
+          <input type="submit" class="myButton" value="Predict Score">
+                </form>
+          <!-- Show predicted output using ML model -->
+      </div> 	  
+	  
+   <div class= 'jk1'>
+   <br><br>	
+   <center><h1 >Prediction</h1></center>
+   <center><h1 >______________________________</h1></center>
+   <br><br>
+   <br><br>
+   <br><br>
+   <h1 id = 'jk3'>Predicted Score: {{ prediction_text }}</h1>
+   </div>
+      </body>
+</html>
