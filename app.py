@@ -2,12 +2,8 @@ from flask import Flask, request, render_template
 import pickle
 import pandas as pd
 import numpy as np
-from flask_cors import CORS, cross_origin
-from wsgiref import simple_server
-
 
 app = Flask(__name__)
-CORS(app)
 model = pickle.load(open('mlr.sav', 'rb'))
 
 @app.route('/')
@@ -39,21 +35,21 @@ def predict():
         elif ballpark_id == 'SEA03':
             temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
         elif ballpark_id == 'PHO06':
-            temp_array = temp_array + [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
         elif ballpark_id == 'TOR02':
-            temp_array = temp_array + [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]
         elif ballpark_id == 'DEN02':
-            temp_array = temp_array + [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
         elif ballpark_id == 'ARL02':
-            temp_array = temp_array + [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
         elif ballpark_id == 'WAS11':
-            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
         elif ballpark_id == 'CHI12':
-            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0]
+            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
         elif ballpark_id == 'DET05':
-            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1]
-        else:
-            temp_array = temp_array + [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1]
+            temp_array = temp_array + [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+        #else:
+         #   temp_array = temp_array + [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1]
         
         try:     
             H_off_avg = float(request.form['H-off_avg'])
@@ -88,9 +84,5 @@ def predict():
 
         return render_template('home1.html', prediction_text=' {}'.format(my_prediction))
 
-if __name__=="__main__":
-    host = '0.0.0.0'
-    port = 8080
-    httpd = simple_server.make_server(host, port, app)
-    httpd.serve_forever()
-    
+if __name__ == '__main__':
+    app.run(debug=True)
